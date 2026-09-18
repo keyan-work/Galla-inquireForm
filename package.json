@@ -1,0 +1,11 @@
+{
+  "name": "galla-inquire-form",
+  "version": "1.0.0",
+  "description": "Galla Inquiry Form with Google Sheets backend",
+  "scripts": {
+    "start": "npx --yes serve -l 3000"
+  },
+  "keywords": ["inquiry", "form", "google-sheets"],
+  "author": "",
+  "license": "ISC"
+}
