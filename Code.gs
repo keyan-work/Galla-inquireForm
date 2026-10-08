@@ -70,6 +70,13 @@ function doPost(e) {
     // Append new submission row
     sheet.appendRow([formattedDate, name, mobile, note]);
 
+    // Send email notification to galla.fouriertech@gmail.com
+    try {
+      sendInquiryEmail(name, rawMobile, note, formattedDate);
+    } catch (mailError) {
+      Logger.log("Email notification error: " + mailError);
+    }
+
     // Return success response
     return ContentService.createTextOutput(JSON.stringify({
       status: 'success',
@@ -97,3 +104,39 @@ function doGet(e) {
     "Send a POST request from the web form to record submissions."
   ).setMimeType(ContentService.MimeType.TEXT);
 }
+
+/**
+ * Sends notification email to galla.fouriertech@gmail.com
+ */
+function sendInquiryEmail(name, mobile, note, timestamp) {
+  var recipient = "galla.fouriertech@gmail.com";
+  var subject = "New Inquiry: " + (name || "Anonymous");
+  var body = "Hello,\n\n" +
+             "You have received a new inquiry from the Galla form:\n\n" +
+             "• Name: " + (name || "N/A") + "\n" +
+             "• Mobile: " + (mobile || "N/A") + "\n" +
+             "• Note:\n" + (note || "N/A") + "\n\n" +
+             "• Received At: " + timestamp + "\n\n" +
+             "--\nGalla Inquiry System";
+
+  MailApp.sendEmail({
+    to: recipient,
+    subject: subject,
+    body: body
+  });
+}
+
+/**
+ * Self-check runner to test email delivery & authorize Apps Script permissions.
+ * Run this directly from the Apps Script editor toolbar.
+ */
+function testSendEmail() {
+  sendInquiryEmail(
+    "Test Lead",
+    "9876543210",
+    "Testing email notification feature from Google Apps Script.",
+    Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm:ss")
+  );
+  Logger.log("Test email sent to galla.fouriertech@gmail.com successfully.");
+}
+

@@ -23,12 +23,13 @@ Follow these 4 simple steps to connect your Inquiry Form to your Google Sheet. I
 
 ---
 
-## Step 3: Deploy as Web App
+## Step 3: Deploy as Web App (or Update Existing Deployment)
 
+### If deploying for the first time:
 1. In the top right corner of the Apps Script editor, click **Deploy** > **New deployment**.
 2. Click the gear icon next to "Select type" and choose **Web app**.
 3. Configure the following settings:
-   - **Description**: `Galla Inquiries v1`
+   - **Description**: `Galla Inquiries with Email Notification`
    - **Execute as**: `Me (your-email@gmail.com)`
    - **Who has access**: **`Anyone`** *(⚠️ IMPORTANT: If you don't choose "Anyone", the public inquiry form will not be able to submit!)*
 4. Click **Deploy**.
@@ -36,10 +37,17 @@ Follow these 4 simple steps to connect your Inquiry Form to your Google Sheet. I
    - Click **Authorize access**.
    - Choose your Google Account.
    - Click **Advanced** > **Go to Untitled project (unsafe)**.
-   - Click **Allow**.
+   - Click **Allow** (this grants permissions to write to sheets and send notification emails to `galla.fouriertech@gmail.com`).
 6. Once deployed, Google will show you a **Web app URL** that looks like:
    `https://script.google.com/macros/s/AKfycby.../exec`
 7. Copy this **Web app URL**.
+
+### If updating an existing deployment:
+1. Click **Deploy** > **Manage deployments**.
+2. Click the **Edit** (pencil) icon on the active deployment.
+3. Under **Version**, select **New version**.
+4. Click **Deploy**.
+5. *(Optional test)* Select `testSendEmail` from the function dropdown at the top and click **Run** to authorize email permissions and verify you receive an email immediately.
 
 ---
 
