@@ -226,7 +226,6 @@ async function handleFormSubmit(e) {
     showAlert(
       'success',
       'Inquiry Sent Successfully!',
-      'Thank you! Your inquiry has been saved directly to our Google Sheet.'
     );
 
     // Reset Form
